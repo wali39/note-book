@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+    <title>Note Book</title>
+</head>
+
+<body>
+    <div class="container">
+        <form action="">
+            <input type="text" class="input" placeholder="type to add task.." />
+            <button class="inp">Add task</button>
+        </form>
+        <ul>
+            <li>
+                <a href="#">data structure and algorithm</a>
+                <span class="del">Delete</span>
+            </li>
+            <li><a href="#">java</a> <span class="del">Delete</span></li>
+            <li><a href="#">jquery</a> <span class="del">Delete</span></li>
+            <li>
+                <a href="#">co-ordinate geometry</a> <span class="del">Delete</span>
+            </li>
+            <li><a href="#">variable</a> <span class="del">Delete</span></li>
+            <li>
+                <a href="#">previous siblings</a> <span class="del">Delete</span>
+            </li>
+        </ul>
+        <div class="container" style="margin-left: 40px">
+            <label for="h">Hide</label>
+
+            <input class="h" type="checkbox" />
+            <button class="clear btn btn-outline-danger m-3">clear task</button>
+            <button class="show btn btn-outline-success">show task</button>
+        </div>
+    </div>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+        
+        .container {
+            width: 500px;
+            height: 100%;
+            margin: 0 auto;
+            padding-top: 50px;
+            box-sizing: border-box;
+        }
+        
+        label {
+            color: red;
+            font-size: 20px;
+        }
+        
+        form {
+            text-align: center;
+            overflow: hidden;
+            width: 100%;
+        }
+        
+        .input {
+            width: 70%;
+            padding: 5px;
+            margin-left: 40px;
+        }
+        
+        .inp {
+            padding: 5px;
+            background: none;
+            color: white;
+            border: none;
+            background-color: green;
+        }
+        
+        ul li {
+            list-style: none;
+            border-left: 5px solid black;
+            background-color: gray;
+            margin-bottom: 5px;
+            padding: 10px;
+        }
+        
+        a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        span {
+            float: right;
+            background-color: red;
+            padding: 5px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-top: -5px;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        var ul = document.querySelector("ul");
+        ul.addEventListener("click", function(e) {
+            if (e.target.className == "del") {
+                // console.log(e.parentElement);
+                var li = e.target.parentElement;
+                ul.removeChild(li);
+            }
+        });
+        var fv = document.forms[0];
+        fv.addEventListener("submit", function(e) {
+            // console.log(fv);
+            e.preventDefault();
+            var val = fv.querySelector("input").value;
+
+            var li = document.createElement("li");
+            var a = document.createElement("a");
+            var sp = document.createElement("span");
+            // li.classList.add()
+            a.textContent = val;
+            sp.textContent = "delete";
+            sp.classList.add("del");
+            li.appendChild(a);
+            li.appendChild(sp);
+            // console.log(li);
+            ul.appendChild(li);
+        });
+        var b = document.querySelectorAll("button");
+        b.forEach(function(b) {
+            b.addEventListener("click", function(e) {
+                var clear = "";
+                for (var i = 0; i < 5; i++) {
+                    clear += e.target.className[i];
+                }
+                var show = "";
+                for (var i = 0; i < 4; i++) {
+                    show += e.target.className[i];
+                }
+                // console.log(clear);
+
+                if (clear === "clear") {
+                    ul.style.display = "none";
+                } else if (show == "show") {
+                    ul.style.display = "block";
+                }
+            });
+        });
+        var hide = document.querySelector(".h");
+        hide.addEventListener("click", function(e) {
+            if (e.target.checked) {
+                ul.style.opacity = "0";
+            } else {
+                ul.style.opacity = "1";
+            }
+        });
+        // console.log(hide);
+    </script>
+</body>
+
+</html>
